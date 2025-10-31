@@ -39,10 +39,25 @@ else
     echo "✅ Google Chrome found"
 fi
 
-# Install Python dependencies
+# Create and activate virtual environment
+echo ""
+echo "📦 Setting up virtual environment..."
+VENV_DIR="$SCRIPT_DIR/venv"
+
+if [ -d "$VENV_DIR" ]; then
+    echo "Virtual environment already exists at $VENV_DIR"
+else
+    python3 -m venv "$VENV_DIR" || {
+        echo "❌ Error: Failed to create virtual environment."
+        exit 1
+    }
+    echo "✅ Virtual environment created"
+fi
+
+# Install Python dependencies in virtual environment
 echo ""
 echo "📦 Installing Python dependencies..."
-pip3 install -r "$SCRIPT_DIR/requirements.txt" || {
+"$VENV_DIR/bin/pip" install -r "$SCRIPT_DIR/requirements.txt" || {
     echo "❌ Error: Failed to install dependencies."
     exit 1
 }
@@ -60,10 +75,10 @@ echo "📁 Creating log directory..."
 mkdir -p "$LOG_DIR"
 echo "✅ Log directory created at $LOG_DIR"
 
-# Get Python path
-PYTHON_PATH=$(which python3)
+# Get Python path from virtual environment
+PYTHON_PATH="$VENV_DIR/bin/python3"
 echo ""
-echo "🔍 Detected Python path: $PYTHON_PATH"
+echo "🔍 Using virtual environment Python: $PYTHON_PATH"
 
 # Create LaunchAgents directory if it doesn't exist
 mkdir -p "$LAUNCH_AGENTS_DIR"
@@ -152,7 +167,7 @@ echo ""
 echo "1. For the first run, you may need to log in to Teams:"
 echo "   - Edit ~/.teams_active_config.json and set \"headless\": false"
 echo "   - Run: launchctl stop com.teamsactive.keeper"
-echo "   - Run: python3 $SCRIPT_DIR/teams_active.py"
+echo "   - Run: $VENV_DIR/bin/python3 $SCRIPT_DIR/teams_active.py"
 echo "   - Log in to Teams in the browser window"
 echo "   - Stop the script (Ctrl+C) and set \"headless\": true again"
 echo "   - Run: launchctl start com.teamsactive.keeper"

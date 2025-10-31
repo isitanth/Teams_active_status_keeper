@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """
-Teams Active Status Keeper
 A background script that keeps Microsoft Teams web version showing as active (green dot).
 """
 

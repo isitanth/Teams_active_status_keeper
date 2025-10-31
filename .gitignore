@@ -60,6 +60,7 @@ Temporary Items
 *.log
 .teams_active_config.json
 chrome_driver/
+WARP.md
 
 # Selenium
 chromedriver
