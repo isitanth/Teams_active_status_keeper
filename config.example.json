@@ -1,0 +1,7 @@
+{
+  "teams_url": "https://teams.microsoft.com",
+  "check_interval": 60,
+  "activity_interval": 300,
+  "headless": true,
+  "user_data_dir": "~/Library/Application Support/TeamsActiveStatus"
+}
