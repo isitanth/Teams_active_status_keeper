@@ -1,6 +1,6 @@
-## Project overview
+## TASK - Project overview
 
-Teams Active Status Keeper is a macOS background service that maintains an active status (green dot) on Microsoft Teams web version by simulating periodic user activity using Selenium WebDriver and Chrome.
+TASK for "Teams Active Status Keeper" is a macOS background service that maintains an active status (green dot) on Microsoft Teams web version by simulating periodic user activity using Selenium WebDriver and Chrome.
 
 ## Architecture
 
