@@ -66,7 +66,7 @@ echo "✅ Dependencies installed"
 # Make the script executable
 echo ""
 echo "🔧 Making script executable..."
-chmod +x "$SCRIPT_DIR/teams_active.py"
+chmod +x "$SCRIPT_DIR/run_teams_active.py"
 echo "✅ Script is now executable"
 
 # Create log directory
@@ -99,8 +99,12 @@ cat > "$TEMP_PLIST" << EOF
     <key>ProgramArguments</key>
     <array>
         <string>$PYTHON_PATH</string>
-        <string>$SCRIPT_DIR/teams_active.py</string>
+        <string>-m</string>
+        <string>teams_active</string>
     </array>
+
+    <key>WorkingDirectory</key>
+    <string>$SCRIPT_DIR/src</string>
     
     <key>RunAtLoad</key>
     <true/>
@@ -167,7 +171,7 @@ echo ""
 echo "1. For the first run, you may need to log in to Teams:"
 echo "   - Edit ~/.teams_active_config.json and set \"headless\": false"
 echo "   - Run: launchctl stop com.teamsactive.keeper"
-echo "   - Run: $VENV_DIR/bin/python3 $SCRIPT_DIR/teams_active.py"
+echo "   - Run: cd $SCRIPT_DIR/src && $VENV_DIR/bin/python3 -m teams_active"
 echo "   - Log in to Teams in the browser window"
 echo "   - Stop the script (Ctrl+C) and set \"headless\": true again"
 echo "   - Run: launchctl start com.teamsactive.keeper"
